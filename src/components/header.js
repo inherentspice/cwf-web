@@ -3,8 +3,8 @@ import Logo from "../assets/logo-frame.png"
 
 export default function Header() {
   return (
-    <div>
-      <img src={Logo} alt="Crypto With Friends Logo" height="300"/>
+    <div className="header">
+      <img src={Logo} alt="Crypto With Friends Logo" height="150"/>
     </div>
   )
 }

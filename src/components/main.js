@@ -3,7 +3,7 @@ import GroupList from "./group-list"
 
 export default function Main() {
   return (
-    <div>
+    <div className="main">
       <GroupList/>
     </div>
   )

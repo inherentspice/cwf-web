@@ -9,13 +9,11 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Header/>
-        <div>
-          <SideBar/>
-          <Main/>
-        </div>
-      </header>
+      <Header/>
+      <div className="general-content">
+        <SideBar/>
+        <Main/>
+      </div>
     </div>
   );
 }
