@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getGroups } from "../services/group-services";
 
 export default function GroupList() {
 
@@ -10,8 +12,7 @@ export default function GroupList() {
     setLoading(true);
     const getData = async () => {
       try {
-        const groupData = await fetch("http://127.0.0.1:8000/api/groups");
-        const groupJson = await groupData.json();
+        const groupJson = await getGroups();
         setGroups(groupJson);
         setLoading(false);
       } catch (err) {
@@ -30,7 +31,11 @@ export default function GroupList() {
   return (
     <div>
         {groups && Array.from(groups).map((group) => {
-          return <p key={group.id}>{group.name}: {group.location}</p>
+          return (
+            <Link key={group.id} to={`/details/${group.id}`}>
+              <p>{group.name}: {group.location}</p>
+            </Link>
+          )
         })}
     </div>
   );
