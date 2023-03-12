@@ -21,7 +21,22 @@ export default function GroupDetails() {
   return (
     <div>
       <Link to="/">Back</Link>
-      {group && <h1>Details here for {group.name} {id}</h1>}
+      {group &&
+        <>
+          <h1>Details here for {group.name}: {group.location}</h1>
+          <h2>{group.description}</h2>
+
+          <h3>Events:</h3>
+          {group.events.map((event) => {
+            return (
+              <div id={event.id}>
+                <p>{event.crypto}</p>
+                <p>{event.time}</p>
+              </div>
+            )
+          })}
+        </>
+      }
     </div>
   )
 }
