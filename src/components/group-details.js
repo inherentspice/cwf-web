@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getGroup } from "../services/group-services";
 import { useFetchGroup } from "../hooks/fetch-group";
+import { DateTime } from "luxon";
 
 export default function GroupDetails() {
 
@@ -28,10 +28,13 @@ export default function GroupDetails() {
 
           <h3>Events:</h3>
           {group.events.map((event) => {
+            const format = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            const eventTime = DateTime.fromFormat(event.time, format);
+
             return (
               <div id={event.id}>
                 <p>{event.crypto}</p>
-                <p>{event.time}</p>
+                <p>{eventTime.toSQLDate()} {eventTime.toFormat("HH:mm")}</p>
               </div>
             )
           })}
