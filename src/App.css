@@ -23,3 +23,12 @@
 .main {
   padding: 1rem;
 }
+
+
+/* group-details */
+
+.dateTime {
+  font-size: 2rem;
+  margin-right: 3rem;
+  color: var(--main-accent-color);
+}
