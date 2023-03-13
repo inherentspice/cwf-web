@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFetchGroup } from "../hooks/fetch-group";
 import { DateTime } from "luxon";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 export default function GroupDetails() {
 
@@ -34,7 +36,9 @@ export default function GroupDetails() {
             return (
               <div id={event.id}>
                 <p>{event.crypto}</p>
-                <p>{eventTime.toSQLDate()} {eventTime.toFormat("HH:mm")}</p>
+                <p>
+                  <CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}
+                  <AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}</p>
               </div>
             )
           })}
