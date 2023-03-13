@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, TextField, InputAdornment, Box } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
+import { auth } from "../services/user-services";
 
 
 export default function SideBar() {
@@ -11,7 +12,8 @@ export default function SideBar() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(username, password);
+    const authData = await auth({username, password});
+    console.log(authData);
   }
 
 
