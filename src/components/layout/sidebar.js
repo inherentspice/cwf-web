@@ -65,6 +65,7 @@ export default function SideBar() {
         :
         <div>
           <p>{authData.user.username}</p>
+          <img src={authData.user.profile.image} alt="user profile picture" height="100"></img>
           <Button variant="contained" color="primary" onClick={() => logout()}>Logout</Button>
         </div>
       }
