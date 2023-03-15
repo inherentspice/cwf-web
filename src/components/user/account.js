@@ -1,37 +1,38 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { useAuth } from "../hooks/use-auth";
+import { useAuth } from "../../hooks/use-auth";
 import { Button, TextField, Box } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
+import { register } from "../../services/user-services";
 
-export default function Register() {
+export default function Account() {
 
   const { authData } = useAuth();
-  const [ username, setUsername ] = useState("");
-  const [ password, setPassword ] = useState("");
-  const [ passwordConfirm, setPasswordConfirm ] = useState("");
-  const [ email, setEmail ] = useState("");
+  // const [ username, setUsername ] = useState("");
+  // const [ password, setPassword ] = useState("");
+  // const [ passwordConfirm, setPasswordConfirm ] = useState("");
+  // const [ email, setEmail ] = useState("");
 
-  const passMatch = () => {
-    return password === passwordConfirm;
-  }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (passMatch()) {
-      console.log("all good", username, password, passwordConfirm, email)
-    } else {
-      console.log("nope")
-    }
+    // if (passMatch()) {
+    //   const regData =  await register({username, email, password, profile: {bio: ""}});
+    //   if (regData) {
+    //     console.log(regData);
+    //   }
+    // } else {
+    //   console.log("nope")
+    // }
   }
 
   return (
     <div>
       <Link to={"/"}>Back</Link>
-      <h1>Sign-up</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Account</h1>
+      {/* <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
             <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
             <TextField
@@ -108,7 +109,7 @@ export default function Register() {
           </Box>
           <Button variant="contained" color="primary" type="submit">Sign-up</Button>
           <br/>
-        </form>
+        </form> */}
     </div>
   )
 }
