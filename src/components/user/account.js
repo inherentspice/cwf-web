@@ -5,111 +5,32 @@ import { Button, TextField, Box } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
-import { register } from "../../services/user-services";
+import { register, uploadProfilePic } from "../../services/user-services";
 
 export default function Account() {
 
   const { authData } = useAuth();
-  // const [ username, setUsername ] = useState("");
-  // const [ password, setPassword ] = useState("");
-  // const [ passwordConfirm, setPasswordConfirm ] = useState("");
-  // const [ email, setEmail ] = useState("");
+  const [ image, setImage ] = useState();
 
 
-  const handleSubmit = async e => {
+  const uploadFile = async e => {
     e.preventDefault();
-    // if (passMatch()) {
-    //   const regData =  await register({username, email, password, profile: {bio: ""}});
-    //   if (regData) {
-    //     console.log(regData);
-    //   }
-    // } else {
-    //   console.log("nope")
-    // }
+    const uploadData = new FormData();
+    uploadData.append("image", image, image.name);
+    const profileData = await uploadProfilePic(authData.user.id, uploadData);
   }
 
   return (
     <div>
       <Link to={"/"}>Back</Link>
       <h1>Account</h1>
-      {/* <form onSubmit={handleSubmit}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="Username"
-              variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
-              onChange={ e => setUsername(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="Password"
-              variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
-              type="password"
-              onChange={ e => setPassword(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="Confirm Password"
-              variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
-              type="password"
-              onChange={ e => setPasswordConfirm(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="Email"
-              variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
-              onChange={ e => setEmail(e.target.value)}
-            />
-          </Box>
-          <Button variant="contained" color="primary" type="submit">Sign-up</Button>
-          <br/>
-        </form> */}
+      <form onSubmit={uploadFile}>
+        <label>
+          <p>Upload Profile Picture</p>
+          <TextField type="file" onChange={e => setImage(e.target.files[0])}></TextField>
+        </label>
+        <Button type="submit" variant="contained" color="primary">Upload File</Button>
+      </form>
     </div>
   )
 }
