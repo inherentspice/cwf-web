@@ -1,8 +1,8 @@
 import React from "react";
 import './App.css';
-import Header from "./components/header";
-import SideBar from "./components/sidebar";
-import Main from "./components/main";
+import Header from "./components/layout/header";
+import SideBar from "./components/layout/sidebar";
+import Main from "./components/layout/main";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { BrowserRouter as Router } from "react-router-dom";
