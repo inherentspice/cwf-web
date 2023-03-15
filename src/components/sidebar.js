@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, TextField, InputAdornment, Box } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import { auth } from "../services/user-services";
 import { useAuth } from "../hooks/use-auth";
-
+import { Link } from "react-router-dom";
 
 export default function SideBar() {
 
@@ -59,6 +59,8 @@ export default function SideBar() {
             />
           </Box>
           <Button variant="contained" color="primary" type="submit">Login</Button>
+          <br/>
+          <Link to={"/register"}>Sign-up</Link>
         </form>
         :
         <div>
