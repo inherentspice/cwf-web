@@ -4,6 +4,7 @@ import { useFetchGroup } from "../../hooks/fetch-group";
 import { DateTime } from "luxon";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import User from "../user/user";
 
 export default function GroupDetails() {
 
@@ -39,6 +40,16 @@ export default function GroupDetails() {
                 <p>
                   <CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}
                   <AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}</p>
+              </div>
+            )
+          })}
+          <h3>Members:</h3>
+          {group.members.map((member) => {
+
+            return (
+              <div id={member.id} className="member-container">
+                <User user={member.user}/>
+                <p>{member.points}pts</p>
               </div>
             )
           })}

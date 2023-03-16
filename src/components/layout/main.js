@@ -12,7 +12,6 @@ export default function Main() {
 
   return (
     <div className="main">
-      {authData && <h3>{authData.user.username}</h3>}
       <Routes>
         <Route exact path="/" element={<GroupList/>}/>
         <Route path="/details/:id" element={<GroupDetails/>}/>
