@@ -1,5 +1,6 @@
 import React from "react";
 import './App.css';
+import 'react-notifications/lib/notifications.css';
 import Header from "./components/layout/header";
 import SideBar from "./components/layout/sidebar";
 import Main from "./components/layout/main";
@@ -7,6 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./hooks/use-auth";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
             </div>
           </Router>
         </div>
+        <NotificationContainer/>
       </AuthProvider>
     </ThemeProvider>
   );

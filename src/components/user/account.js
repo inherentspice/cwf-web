@@ -4,6 +4,8 @@ import { useAuth } from "../../hooks/use-auth";
 import { Button, TextField, Box } from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import { changePassword, uploadProfilePic } from "../../services/user-services";
+import { NotificationManager } from "react-notifications";
+
 
 export default function Account() {
 
@@ -21,20 +23,23 @@ export default function Account() {
     e.preventDefault();
     const uploadData = new FormData();
     uploadData.append("image", image, image.name);
-    const profileData = await uploadProfilePic(authData.user.id, uploadData);
+    const uploaded = await uploadProfilePic(authData.user.id, uploadData);
+    if (uploaded) {
+      NotificationManager.success("Image has been uploaded");
+    } else {
+      NotificationManager.error("Error uploading image")
+    }
   }
 
   const changePass = async e => {
     e.preventDefault();
     if (passMatch()) {
-      const regData =  await changePassword({old_password: oldPassword, new_password: newPassword}, authData.user.id);
-      // if (regData) {
-      //   const authDataJson = await auth({username, password});
-      //   setAuth(authDataJson);
-      //   navigate("/account");
-      // }
+      const passData =  await changePassword({old_password: oldPassword, new_password: newPassword}, authData.user.id);
+      if (passData) {
+        NotificationManager.success("Password has been changed");
+      }
     } else {
-      console.log("nope")
+      NotificationManager.error("Passwords don't match")
     }
   }
 
