@@ -8,6 +8,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import User from "../user/user";
 import { Button } from "@mui/material";
 import { joinGroup, leaveGroup } from "../../services/group-services";
+import Comments from "../comments/comments";
 
 export default function GroupDetails() {
 
@@ -89,6 +90,7 @@ export default function GroupDetails() {
               </div>
             )
           })}
+          <Comments group={group}/>
         </>
       }
     </div>
