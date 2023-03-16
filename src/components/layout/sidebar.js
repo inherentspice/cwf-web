@@ -4,13 +4,16 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/use-auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import User from "../user/user";
 
 export default function SideBar() {
 
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
   const { authData, setAuth } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -22,6 +25,9 @@ export default function SideBar() {
     setAuth(null);
   }
 
+  const account = () => {
+    navigate("/account");
+  }
 
   return (
     <div className="sidebar">
@@ -64,9 +70,12 @@ export default function SideBar() {
         </form>
         :
         <div>
-          <p>{authData.user.username}</p>
-          <img src={authData.user.profile.image} alt="user profile picture" height="100"></img>
+          <User user={authData.user}/>
+          <br/>
+          <br/>
           <Button variant="contained" color="primary" onClick={() => logout()}>Logout</Button>
+          <Button variant="contained" color="primary" onClick={() => account()}>My Account</Button>
+
         </div>
       }
     </div>
