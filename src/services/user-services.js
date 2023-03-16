@@ -30,12 +30,13 @@ export async function register(userData) {
   }
 }
 
-export async function changePassword(userData, userId) {
+export async function changePassword(userData, userId, token) {
   try {
     const authData = await fetch(`http://127.0.0.1:8000/api/users/${userId}/change_password/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
       },
       body: JSON.stringify(userData)
     })
