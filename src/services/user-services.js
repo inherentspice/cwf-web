@@ -1,3 +1,5 @@
+import { status } from "../utils";
+
 export async function auth(credentials) {
   try {
     const authData = await fetch("http://127.0.0.1:8000/api/authenticate/", {
@@ -7,7 +9,7 @@ export async function auth(credentials) {
       },
       body: JSON.stringify(credentials)
     })
-    return await authData.json()
+    return await status(authData);
   } catch (err) {
     console.log(err);
   }
@@ -22,7 +24,7 @@ export async function register(userData) {
       },
       body: JSON.stringify(userData)
     })
-    return await authData.json()
+    return await status(authData);
   } catch (err) {
     console.log(err);
   }
@@ -37,7 +39,7 @@ export async function changePassword(userData, userId) {
       },
       body: JSON.stringify(userData)
     })
-    return await authData.json()
+    return await status(authData)
   } catch (err) {
     console.log(err);
   }
@@ -49,7 +51,7 @@ export async function uploadProfilePic(profileId, data) {
       method: "PUT",
       body: data
     })
-    return await authData.json()
+    return await status(authData)
   } catch (err) {
     console.log(err);
   }
