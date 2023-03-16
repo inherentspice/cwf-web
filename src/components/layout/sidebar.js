@@ -5,6 +5,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/use-auth";
 import { Link } from "react-router-dom";
+import User from "../user/user";
 
 export default function SideBar() {
 
@@ -64,8 +65,9 @@ export default function SideBar() {
         </form>
         :
         <div>
-          <p>{authData.user.username}</p>
-          <img src={authData.user.profile.image} alt="user profile picture" height="100"></img>
+          <User user={authData.user}/>
+          <br/>
+          <br/>
           <Button variant="contained" color="primary" onClick={() => logout()}>Logout</Button>
         </div>
       }
