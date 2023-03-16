@@ -33,7 +33,11 @@
   color: var(--main-accent-color);
 }
 
-
+.member-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 /* user */
 .user-cont {
   width: 100px;

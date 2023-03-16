@@ -17,3 +17,33 @@ export async function getGroups() {
     console.log(err);
   }
 }
+
+export async function joinGroup(data) {
+  try {
+    const groupData = await fetch(`http://127.0.0.1:8000/api/members/join/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+    return await status(groupData);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function leaveGroup(data) {
+  try {
+    const groupData = await fetch(`http://127.0.0.1:8000/api/members/leave/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+    return await status(groupData);
+  } catch (err) {
+    console.log(err);
+  }
+}
