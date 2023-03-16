@@ -2,16 +2,20 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
 import { Button, TextField, Box } from "@mui/material";
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
-import EmailIcon from '@mui/icons-material/Email';
-import { register, uploadProfilePic } from "../../services/user-services";
+import { changePassword, uploadProfilePic } from "../../services/user-services";
 
 export default function Account() {
 
   const { authData } = useAuth();
   const [ image, setImage ] = useState();
+  const [ oldPassword, setOldPassword ] = useState("");
+  const [ newPassword, setNewPassword ] = useState("");
+  const [ newPasswordConfirm, setNewPasswordConfirm] = useState("");
 
+  const passMatch = () => {
+    return newPassword === newPasswordConfirm;
+  }
 
   const uploadFile = async e => {
     e.preventDefault();
@@ -20,10 +24,24 @@ export default function Account() {
     const profileData = await uploadProfilePic(authData.user.id, uploadData);
   }
 
+  const changePass = async e => {
+    e.preventDefault();
+    if (passMatch()) {
+      const regData =  await changePassword({old_password: oldPassword, new_password: newPassword}, authData.user.id);
+      // if (regData) {
+      //   const authDataJson = await auth({username, password});
+      //   setAuth(authDataJson);
+      //   navigate("/account");
+      // }
+    } else {
+      console.log("nope")
+    }
+  }
+
   return (
     <div>
       <Link to={"/"}>Back</Link>
-      <h1>Account</h1>
+      <h1>Change your picture</h1>
       <form onSubmit={uploadFile}>
         <label>
           <p>Upload Profile Picture</p>
@@ -31,6 +49,67 @@ export default function Account() {
         </label>
         <Button type="submit" variant="contained" color="primary">Upload File</Button>
       </form>
-    </div>
+      <h1>Change your password</h1>
+      <form onSubmit={changePass}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+            <TextField
+              id="input-with-sx"
+              label="Old Password"
+              variant="standard"
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  opacity: .9,
+                },
+                "input": {
+                  color: "white"
+                }
+              }}
+              type="password"
+              onChange={ e => setOldPassword(e.target.value)}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+            <TextField
+              id="input-with-sx"
+              label="New Password"
+              variant="standard"
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  opacity: .9,
+                },
+                "input": {
+                  color: "white"
+                }
+              }}
+              type="password"
+              onChange={ e => setNewPassword(e.target.value)}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+            <TextField
+              id="input-with-sx"
+              label="Confirm New Password"
+              variant="standard"
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  opacity: .9,
+                },
+                "input": {
+                  color: "white"
+                }
+              }}
+              type="password"
+              onChange={ e => setNewPasswordConfirm(e.target.value)}
+            />
+          </Box>
+        <Button type="submit" variant="contained" color="primary">Change Password</Button>
+    </form>
+  </div>
   )
 }

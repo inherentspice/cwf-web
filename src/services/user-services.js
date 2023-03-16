@@ -28,6 +28,21 @@ export async function register(userData) {
   }
 }
 
+export async function changePassword(userData, userId) {
+  try {
+    const authData = await fetch(`http://127.0.0.1:8000/api/users/${userId}/change_password/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData)
+    })
+    return await authData.json()
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export async function uploadProfilePic(profileId, data) {
   try {
     const authData = await fetch(`http://127.0.0.1:8000/api/profile/${profileId}/`, {
