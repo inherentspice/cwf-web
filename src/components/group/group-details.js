@@ -15,10 +15,20 @@ export default function GroupDetails() {
   const { authData } = useAuth();
   const [ data, loading, error] = useFetchGroup(id);
   const [ group, setGroup ] = useState(null);
+  const [ inGroup, setInGroup ] = useState(false);
+  const [ isAdmin, setIsAdmin ] = useState(false);
 
   useEffect(() => {
+    if (data?.members) {
+      if (authData?.user) {
+        setInGroup(!!data.members.find(member => member.user.id === authData.user.id))
+        setIsAdmin(data.members.find(member => member.user.id === authData.user.id)?.admin)
+      }
+    }
     setGroup(data);
   }, [data]);
+
+
 
   const joinHere = async () => {
     try {
@@ -49,8 +59,10 @@ export default function GroupDetails() {
         <>
           <h1>Details here for {group.name}: {group.location}</h1>
           <h2>{group.description}</h2>
-          <Button onClick={() => joinHere()} variant="contained" color="primary">Join Group</Button>
-          <Button onClick={() => leaveHere()} variant="contained" color="primary">Leave Group</Button>
+          {inGroup ?
+            <Button onClick={() => leaveHere()} variant="contained" color="primary">Leave Group</Button> :
+            <Button onClick={() => joinHere()} variant="contained" color="primary">Join Group</Button>
+          }
 
 
           <h3>Events:</h3>
