@@ -5,6 +5,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useParams } from "react-router-dom";
 import { useFetchEvent } from "../../hooks/fetch-event";
 import { useAuth } from "../../hooks/use-auth";
+import User from "../user/user";
 
 export default function Event({}) {
 
@@ -31,10 +32,21 @@ export default function Event({}) {
       {event && eventTime &&
         <div>
           <h2>{event.crypto}</h2>
+          <p>Starting Price: ${event.price_start}</p>
+          <p>Current Price: </p>
+          <p>Ending Price: {event.price_end ? `$${event.price_end}` : ""}</p>
           <h3>
             <CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}
             <AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}
           </h3>
+          <hr/>
+          { event && event.bets && event.bets.map(bet => {
+            return <div key={bet.id} className="bets">
+              <User user={bet.user}/>
+              <h4>${bet.price_end}</h4>
+              <h4>Points: </h4>
+            </div>
+          })}
         </div>
       }
     </>
