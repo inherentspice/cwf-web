@@ -2,8 +2,16 @@ import React from "react";
 import { DateTime } from "luxon";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { useNavigate } from "react-router-dom";
 
 export default function EventList({events}) {
+
+  const navigate = useNavigate();
+
+  const openEvent = eventId => {
+    console.log("here")
+    navigate(`/event/${eventId}`);
+  }
   return (
     <>
       <h3>Events:</h3>
@@ -12,9 +20,9 @@ export default function EventList({events}) {
         const eventTime = DateTime.fromFormat(event.time, format);
 
         return (
-          <div id={event.id}>
-            <p>{event.crypto}</p>
-            <p>
+          <div id={event.id} onClick={() => openEvent(event.id)}>
+            <p>{event.crypto}
+            &nbsp; : &nbsp;
               <CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}
               <AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}</p>
           </div>
