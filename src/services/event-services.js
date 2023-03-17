@@ -14,3 +14,19 @@ export async function getEvent(token, id) {
     console.log(err);
   }
 }
+
+export async function placeBet(token, item) {
+  try {
+    const groupData = await fetch(`http://127.0.0.1:8000/api/bets/place_bet/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
+      },
+      body: JSON.stringify(item)
+    });
+    return await status(groupData);
+  } catch (err) {
+    console.log(err);
+  }
+}

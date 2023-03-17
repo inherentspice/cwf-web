@@ -9,7 +9,6 @@ export default function EventList({events}) {
   const navigate = useNavigate();
 
   const openEvent = eventId => {
-    console.log("here")
     navigate(`/event/${eventId}`);
   }
   return (
