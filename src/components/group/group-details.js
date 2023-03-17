@@ -27,8 +27,6 @@ export default function GroupDetails() {
     setGroup(data);
   }, [data]);
 
-
-
   const joinHere = async () => {
     try {
       const joinedGroup = await joinGroup({user: authData.user.id, group: group.id});
