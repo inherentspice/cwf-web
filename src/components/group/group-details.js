@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import { joinGroup, leaveGroup } from "../../services/group-services";
 import Comments from "../comments/comments";
 import EventList from "../events/event-list";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function GroupDetails() {
 
@@ -57,7 +58,7 @@ export default function GroupDetails() {
 
   return (
     <div>
-      <Link to="/">Back</Link>
+      <Link to={"/"}><ArrowBackIcon/></Link>
       {group &&
         <>
           <h1>Details here for {group.name}: {group.location}</h1>

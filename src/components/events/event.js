@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useParams, Link } from "react-router-dom";
 import { useFetchEvent } from "../../hooks/fetch-event";
 import { useAuth } from "../../hooks/use-auth";
@@ -10,6 +11,7 @@ import { TextField, Box, Button } from "@mui/material";
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import { placeBet } from "../../services/event-services";
 import { NotificationManager } from "react-notifications";
+import { textFieldStyling } from "../layout/mui-styles";
 
 export default function Event({}) {
 
@@ -51,7 +53,7 @@ export default function Event({}) {
     <>
       {event && eventTime &&
         <div>
-          <Link to={`/details/${event.group}`}>Back</Link>
+          <Link to={`/details/${event.group}`}><ArrowBackIcon/></Link>
           <h2>{event.crypto}</h2>
           <p>Starting Price: ${event.price_start}</p>
           <p>Current Price: </p>
@@ -73,16 +75,8 @@ export default function Event({}) {
             <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
             <TextField
               label="Price Prediction"
-              variant="outlined"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white",
-                },
-              }}
+              variant="standard"
+              sx={textFieldStyling}
               type="number"
               onChange={ e => setPricePrediction(e.target.value)}
             />
