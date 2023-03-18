@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useFetchGroup } from "../../hooks/fetch-group";
 import { useAuth } from "../../hooks/use-auth";
-import { DateTime } from "luxon";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import User from "../user/user";
 import { Button } from "@mui/material";
 import { joinGroup, leaveGroup } from "../../services/group-services";
 import Comments from "../comments/comments";
+import EventList from "../events/event-list";
 
 export default function GroupDetails() {
 
@@ -19,6 +17,8 @@ export default function GroupDetails() {
   const [ inGroup, setInGroup ] = useState(false);
   const [ isAdmin, setIsAdmin ] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (data?.members) {
       if (authData?.user) {
@@ -28,8 +28,6 @@ export default function GroupDetails() {
     }
     setGroup(data);
   }, [data]);
-
-
 
   const joinHere = async () => {
     try {
@@ -49,6 +47,10 @@ export default function GroupDetails() {
     }
   }
 
+  const addEvent = async () => {
+    navigate("/event-form", {state: group})
+  }
+
   if (error) return <h1>Error</h1>;
 
   if (loading) return <h1>Loading...</h1>
@@ -65,21 +67,10 @@ export default function GroupDetails() {
             <Button onClick={() => joinHere()} variant="contained" color="primary">Join Group</Button>
           }
 
+          {isAdmin && <Button onClick={() => addEvent()} variant="contained" color="primary">Add Event</Button>}
 
-          <h3>Events:</h3>
-          {group.events.map((event) => {
-            const format = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            const eventTime = DateTime.fromFormat(event.time, format);
+          <EventList events={group.events}/>
 
-            return (
-              <div id={event.id}>
-                <p>{event.crypto}</p>
-                <p>
-                  <CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}
-                  <AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}</p>
-              </div>
-            )
-          })}
           <h3>Members:</h3>
           {group.members.map((member) => {
 
