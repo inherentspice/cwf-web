@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useFetchEvent } from "../../hooks/fetch-event";
 import { useAuth } from "../../hooks/use-auth";
 import User from "../user/user";
@@ -51,6 +51,7 @@ export default function Event({}) {
     <>
       {event && eventTime &&
         <div>
+          <Link to={`/details/${event.group}`}>Back</Link>
           <h2>{event.crypto}</h2>
           <p>Starting Price: ${event.price_start}</p>
           <p>Current Price: </p>

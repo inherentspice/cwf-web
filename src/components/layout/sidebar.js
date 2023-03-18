@@ -23,6 +23,7 @@ export default function SideBar() {
 
   const logout = () => {
     setAuth(null);
+    navigate("/");
   }
 
   const account = () => {

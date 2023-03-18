@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useFetchGroup } from "../../hooks/fetch-group";
 import { useAuth } from "../../hooks/use-auth";
 import User from "../user/user";
@@ -16,6 +16,8 @@ export default function GroupDetails() {
   const [ group, setGroup ] = useState(null);
   const [ inGroup, setInGroup ] = useState(false);
   const [ isAdmin, setIsAdmin ] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data?.members) {
@@ -45,6 +47,10 @@ export default function GroupDetails() {
     }
   }
 
+  const addEvent = async () => {
+    navigate("/event-form", {state: group})
+  }
+
   if (error) return <h1>Error</h1>;
 
   if (loading) return <h1>Loading...</h1>
@@ -60,6 +66,8 @@ export default function GroupDetails() {
             <Button onClick={() => leaveHere()} variant="contained" color="primary">Leave Group</Button> :
             <Button onClick={() => joinHere()} variant="contained" color="primary">Join Group</Button>
           }
+
+          {isAdmin && <Button onClick={() => addEvent()} variant="contained" color="primary">Add Event</Button>}
 
           <EventList events={group.events}/>
 

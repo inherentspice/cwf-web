@@ -46,10 +46,14 @@ export async function changePassword(userData, userId, token) {
   }
 }
 
-export async function uploadProfilePic(profileId, data) {
+export async function uploadProfilePic(token, profileId, data) {
   try {
     const authData = await fetch(`http://127.0.0.1:8000/api/profile/${profileId}/`, {
       method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
+      },
       body: data
     })
     return await status(authData)

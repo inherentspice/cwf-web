@@ -23,7 +23,7 @@ export default function Account() {
     e.preventDefault();
     const uploadData = new FormData();
     uploadData.append("image", image, image.name);
-    const uploaded = await uploadProfilePic(authData.user.id, uploadData);
+    const uploaded = await uploadProfilePic(authData.token, authData.user.id, uploadData);
     if (uploaded) {
       NotificationManager.success("Image has been uploaded");
     } else {
