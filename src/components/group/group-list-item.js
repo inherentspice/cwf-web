@@ -6,12 +6,9 @@ export default function GroupListItem({group}) {
 
   return (
     <div className="group-list-item-cont">
-
       <Link to={`/details/${group.id}`}>
         <h3><span className="highlight">{group.name}:</span> {group.location}</h3>
       </Link>
-
-
       <div className="member-count-cont">
         <GroupIcon/> {group.num_members}
       </div>
