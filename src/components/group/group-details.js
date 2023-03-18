@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import { joinGroup, leaveGroup } from "../../services/group-services";
 import Comments from "../comments/comments";
 import EventList from "../events/event-list";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function GroupDetails() {
 
@@ -21,6 +22,8 @@ export default function GroupDetails() {
 
   useEffect(() => {
     if (data?.members) {
+      data.members.sort((a, b) => b.points - a.points);
+
       if (authData?.user) {
         setInGroup(!!data.members.find(member => member.user.id === authData.user.id))
         setIsAdmin(data.members.find(member => member.user.id === authData.user.id)?.admin)
@@ -57,7 +60,7 @@ export default function GroupDetails() {
 
   return (
     <div>
-      <Link to="/">Back</Link>
+      <Link to={"/"}><ArrowBackIcon/></Link>
       {group &&
         <>
           <h1>Details here for {group.name}: {group.location}</h1>
@@ -77,7 +80,7 @@ export default function GroupDetails() {
             return (
               <div id={member.id} className="member-container">
                 <User user={member.user}/>
-                <p>{member.points}pts</p>
+                <p>{member.points | 0}pts</p>
               </div>
             )
           })}
