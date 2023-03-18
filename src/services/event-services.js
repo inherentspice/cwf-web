@@ -1,8 +1,10 @@
 import { status } from "../utils";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export async function getEvent(token, id) {
   try {
-    const groupData = await fetch(`http://127.0.0.1:8000/api/events/${id}/`, {
+    const groupData = await fetch(`${apiUrl}/api/events/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +19,7 @@ export async function getEvent(token, id) {
 
 export async function placeBet(token, item) {
   try {
-    const groupData = await fetch(`http://127.0.0.1:8000/api/bets/place_bet/`, {
+    const groupData = await fetch(`${apiUrl}/api/bets/place_bet/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +35,7 @@ export async function placeBet(token, item) {
 
 export async function setEndPrice(token, item) {
   try {
-    const groupData = await fetch(`http://127.0.0.1:8000/api/events/${item.event}/set_result/`, {
+    const groupData = await fetch(`${apiUrl}/api/events/${item.event}/set_result/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +50,7 @@ export async function setEndPrice(token, item) {
 }
 export async function createEvent(token, data) {
   try {
-    const groupData = await fetch(`http://127.0.0.1:8000/api/events/`, {
+    const groupData = await fetch(`${apiUrl}/api/events/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

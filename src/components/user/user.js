@@ -14,13 +14,10 @@ export default function User({user}) {
 
   return (
     <div className="user-cont">
-      {user.profile.image ?
-        <Avatar src={user.profile.image} alt="user profile picture" sx={{height: "100px", width: "100px"}}/> :
         <Avatar
           sx={avatarStyle}
           alt="temporary user profile picture"
         >{user.username[0]}</Avatar>
-      }
       <h4 className="username">{user.username}</h4>
     </div>
   )

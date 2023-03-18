@@ -1,8 +1,10 @@
 import { status } from "../utils";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export async function auth(credentials) {
   try {
-    const authData = await fetch("http://127.0.0.1:8000/api/authenticate/", {
+    const authData = await fetch(`${apiUrl}/api/authenticate/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +19,7 @@ export async function auth(credentials) {
 
 export async function register(userData) {
   try {
-    const authData = await fetch("http://127.0.0.1:8000/api/users/", {
+    const authData = await fetch(`${apiUrl}/api/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +34,7 @@ export async function register(userData) {
 
 export async function changePassword(userData, userId, token) {
   try {
-    const authData = await fetch(`http://127.0.0.1:8000/api/users/${userId}/change_password/`, {
+    const authData = await fetch(`${apiUrl}/api/users/${userId}/change_password/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +50,7 @@ export async function changePassword(userData, userId, token) {
 
 export async function uploadProfilePic(token, profileId, data) {
   try {
-    const authData = await fetch(`http://127.0.0.1:8000/api/profile/${profileId}/`, {
+    const authData = await fetch(`${apiUrl}/api/profile/${profileId}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
