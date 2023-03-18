@@ -4,6 +4,10 @@
   color: white;
 }
 
+a:hover {
+  color: var(--main-accent-color-dark);
+}
+
 .header {
   width: 100%;
   border-bottom: 2px solid var(--main-accent-color);
@@ -24,6 +28,9 @@
   padding: 1rem;
 }
 
+.highlight {
+  color: var(--main-accent-color-dark);
+}
 
 /* group-details */
 
@@ -38,6 +45,24 @@
   align-items: center;
   gap: 1rem;
 }
+
+.group-list-item-cont {
+  text-align: left;
+  border: 2px solid var(--main-accent-color);
+  border-radius: 124px;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.member-count-cont {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 
 /* user */
 
