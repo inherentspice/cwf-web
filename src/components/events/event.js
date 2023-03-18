@@ -58,11 +58,12 @@ export default function Event({}) {
     try {
       const eventData = await setEndPrice(authData.token, {price_end: priceEnd, event: event.id})
       if (eventData) {
-        NotificationManager.success("End Price has been set.")
+        setEvent(eventData)
+        NotificationManager.success("End price has been set.")
       }
     } catch (err) {
       console.log(err);
-      NotificationManager.error("Something went wrong placing your bet. Remember: you can't change your bet once placed.");
+      NotificationManager.error("Something went wrong setting the end price.");
     }
   }
 
@@ -94,7 +95,7 @@ export default function Event({}) {
             return <div key={bet.id} className="bets">
               <User user={bet.user}/>
               <h4>${bet.price_end}</h4>
-              <h4>Points: </h4>
+              <h4>Points: {bet.points}</h4>
             </div>
           })}
           { isFuture ?
@@ -126,7 +127,7 @@ export default function Event({}) {
                   onChange={ e => setPriceEnd(e.target.value)}
                 />
               </Box>
-              <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!pricePrediction}>Set Ending Price</Button>
+              <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!priceEnd}>Set Ending Price</Button>
             </div>
             }
         </div>

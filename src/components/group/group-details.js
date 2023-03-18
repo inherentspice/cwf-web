@@ -22,6 +22,8 @@ export default function GroupDetails() {
 
   useEffect(() => {
     if (data?.members) {
+      data.members.sort((a, b) => b.points - a.points);
+
       if (authData?.user) {
         setInGroup(!!data.members.find(member => member.user.id === authData.user.id))
         setIsAdmin(data.members.find(member => member.user.id === authData.user.id)?.admin)
@@ -78,7 +80,7 @@ export default function GroupDetails() {
             return (
               <div id={member.id} className="member-container">
                 <User user={member.user}/>
-                <p>{member.points}pts</p>
+                <p>{member.points | 0}pts</p>
               </div>
             )
           })}

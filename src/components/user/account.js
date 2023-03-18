@@ -5,6 +5,7 @@ import { Button, TextField, Box } from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import { changePassword, uploadProfilePic } from "../../services/user-services";
 import { NotificationManager } from "react-notifications";
+import { textFieldStyling } from "../layout/mui-styles";
 
 
 export default function Account() {
@@ -54,7 +55,7 @@ export default function Account() {
       <form onSubmit={uploadFile}>
         <label>
           <p>Upload Profile Picture</p>
-          <TextField type="file" onChange={e => setImage(e.target.files[0])}></TextField>
+          <TextField type="file" onChange={e => setImage(e.target.files[0])} sx={textFieldStyling}></TextField>
         </label>
         <Button type="submit" variant="contained" color="primary">Upload File</Button>
       </form>
@@ -66,15 +67,7 @@ export default function Account() {
               id="input-with-sx"
               label="Old Password"
               variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
+              sx={textFieldStyling}
               type="password"
               onChange={ e => setOldPassword(e.target.value)}
             />
@@ -85,15 +78,7 @@ export default function Account() {
               id="input-with-sx"
               label="New Password"
               variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
+              sx={textFieldStyling}
               type="password"
               onChange={ e => setNewPassword(e.target.value)}
             />
@@ -104,15 +89,7 @@ export default function Account() {
               id="input-with-sx"
               label="Confirm New Password"
               variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                },
-                "input": {
-                  color: "white"
-                }
-              }}
+              sx={textFieldStyling}
               type="password"
               onChange={ e => setNewPasswordConfirm(e.target.value)}
             />
