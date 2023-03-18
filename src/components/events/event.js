@@ -9,7 +9,7 @@ import { useAuth } from "../../hooks/use-auth";
 import User from "../user/user";
 import { TextField, Box, Button } from "@mui/material";
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
-import { placeBet } from "../../services/event-services";
+import { placeBet, setEndPrice } from "../../services/event-services";
 import { NotificationManager } from "react-notifications";
 import { textFieldStyling } from "../layout/mui-styles";
 
@@ -24,6 +24,7 @@ export default function Event({}) {
   const [ isFuture, setIsFuture ] = useState(false);
   const [ timeDifference, setTimeDifference ] = useState(null);
   const [ pricePrediction, setPricePrediction ] = useState(null);
+  const [ priceEnd, setPriceEnd ] = useState(null);
 
   useEffect(() => {
     setEvent(data);
@@ -47,6 +48,18 @@ export default function Event({}) {
         setPricePrediction(null);
       }
       NotificationManager.success(bet.message)
+    } catch (err) {
+      console.log(err);
+      NotificationManager.error("Something went wrong placing your bet. Remember: you can't change your bet once placed.");
+    }
+  }
+
+  const sendEndPrice = async () => {
+    try {
+      const eventData = await setEndPrice(authData.token, {price_end: priceEnd, event: event.id})
+      if (eventData) {
+        NotificationManager.success("End Price has been set.")
+      }
     } catch (err) {
       console.log(err);
       NotificationManager.error("Something went wrong placing your bet. Remember: you can't change your bet once placed.");
@@ -84,7 +97,7 @@ export default function Event({}) {
               <h4>Points: </h4>
             </div>
           })}
-          { isFuture &&
+          { isFuture ?
             <div>
               <hr/>
 
@@ -99,6 +112,21 @@ export default function Event({}) {
                 />
               </Box>
               <Button variant="contained" onClick={() => sendBet()} color="secondary" disabled={!pricePrediction}>Place Bet</Button>
+            </div> :
+            <div>
+              <hr/>
+
+              <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+                <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+                <TextField
+                  label="Ending Price"
+                  variant="standard"
+                  sx={textFieldStyling}
+                  type="number"
+                  onChange={ e => setPriceEnd(e.target.value)}
+                />
+              </Box>
+              <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!pricePrediction}>Set Ending Price</Button>
             </div>
             }
         </div>
