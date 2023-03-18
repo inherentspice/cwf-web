@@ -30,3 +30,19 @@ export async function placeBet(token, item) {
     console.log(err);
   }
 }
+
+export async function createEvent(token, data) {
+  try {
+    const groupData = await fetch(`http://127.0.0.1:8000/api/events/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+    return await status(groupData);
+  } catch (err) {
+    console.log(err);
+  }
+}
