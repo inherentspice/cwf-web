@@ -6,6 +6,7 @@ import { auth } from "../../services/user-services";
 import { useAuth } from "../../hooks/use-auth";
 import { Link, useNavigate} from "react-router-dom";
 import User from "../user/user";
+import { textFieldStyling } from "./mui-styles";
 
 export default function SideBar() {
 
@@ -33,19 +34,15 @@ export default function SideBar() {
   return (
     <div className="sidebar">
       {!authData ?
-        <form onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div>
           <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
             <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
             <TextField
               id="input-with-sx"
               label="Username"
               variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                }
-              }}
+              sx={textFieldStyling}
               onChange={ e => setUsername(e.target.value)}
             />
           </Box>
@@ -55,27 +52,26 @@ export default function SideBar() {
               id="input-with-sx"
               label="Password"
               variant="standard"
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                  opacity: .9,
-                }
-              }}
+              sx={textFieldStyling}
               type="password"
               onChange={ e => setPassword(e.target.value)}
             />
           </Box>
-          <Button variant="contained" color="primary" type="submit">Login</Button>
-          <br/>
-          <Link to={"/register"}>Sign-up</Link>
+          </div>
+          <div className="login-submit-cont">
+            <Button variant="contained" color="primary" type="submit">Login</Button>
+            <Link to={"/register"}>Sign-up</Link>
+          </div>
         </form>
         :
         <div>
           <User user={authData.user}/>
           <br/>
           <br/>
-          <Button variant="contained" color="primary" onClick={() => logout()}>Logout</Button>
-          <Button variant="contained" color="primary" onClick={() => account()}>My Account</Button>
+          <div className="user-actions-cont">
+            <Button variant="contained" color="primary" onClick={() => logout()}>Logout</Button>
+            <Button variant="contained" color="primary" onClick={() => account()}>My Account</Button>
+          </div>
 
         </div>
       }
