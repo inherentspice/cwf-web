@@ -44,37 +44,40 @@ export default function GroupForm() {
     }
   }
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-          <TextField
-            label="Group Name"
-            variant="standard"
-            sx={textFieldStyling}
-            type="text"
-            onChange={ (e) => setName(e.target.value)}
-          />
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-          <TextField
-            label="Location"
-            variant="standard"
-            sx={textFieldStyling}
-            type="text"
-            onChange={ (e) => setLocation(e.target.value)}
-          />
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-          <TextField
-            label="Description"
-            variant="standard"
-            sx={textFieldStyling}
-            type="text"
-            onChange={ (e) => setDescription(e.target.value)}
-          />
-        </Box>
-        <Button variant="contained" color="secondary" type="submit">Create Event</Button>
-      </form>
-    </>
+    <div className="register-cont">
+      <div className="sign-up-cont">
+        <h2>Create A New Group</h2>
+        <form className="register-form" onSubmit={handleSubmit}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+            <TextField
+              label="Group Name"
+              variant="standard"
+              sx={textFieldStyling}
+              type="text"
+              onChange={ (e) => setName(e.target.value)}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+            <TextField
+              label="Location"
+              variant="standard"
+              sx={textFieldStyling}
+              type="text"
+              onChange={ (e) => setLocation(e.target.value)}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+            <TextField
+              label="Description"
+              variant="standard"
+              sx={textFieldStyling}
+              type="text"
+              onChange={ (e) => setDescription(e.target.value)}
+            />
+          </Box>
+          <Button variant="contained" color="secondary" type="submit">Create Event</Button>
+        </form>
+      </div>
+    </div>
   )
 }

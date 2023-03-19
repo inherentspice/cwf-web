@@ -98,14 +98,15 @@ a:hover {
 
 .dateTime {
   font-size: 2rem;
-  margin-right: 3rem;
-  color: var(--main-accent-color);
+  margin-right: 0.5rem;
+  color: inherit;
 }
 
 .member-container {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .group-list-cont {
@@ -144,6 +145,27 @@ a:hover {
   z-index: 0;
 }
 
+.group-event-cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 1rem;
+}
+
+.group-details-cont {
+  background-color: var(--dark-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.member-list-cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 /* user */
 
@@ -175,7 +197,7 @@ a:hover {
 .dialog-body {
   position: relative;
   padding: 5px;
-  background-color: var(--bg-light-color);
+  background-color: var(--dark-color);
   border-radius: 5px;
   border: 1px solid var(--main-accent-color);
 }
@@ -185,7 +207,7 @@ a:hover {
   height: 0;
   position: absolute;
   background-color: transparent;
-  border: 10px solid var(--bg-light-color);
+  border: 10px solid var(--main-accent-color);
   top: 5px;
   left: -25px;
   border-top-color: transparent;
@@ -202,6 +224,16 @@ a:hover {
   float: right;
 }
 
+.comments-cont {
+  grid-column: span 2 ;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comments-cont button {
+  width: fit-content;
+}
 /* events */
 
 .bets {
@@ -209,6 +241,22 @@ a:hover {
   grid-template-columns: 2fr 1fr 1fr;
   margin: 5px 0 0 0;
   align-items: center;
+}
+
+.event-info {
+  display: flex;
+  background-color: var(--color-green);
+  border-radius: 62px;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 800;
+  color: var(--dark-color);
+  cursor: pointer;
+}
+
+.event-info:hover {
+  color: var(--main-accent-color-dark);
 }
 
 /* landing */
@@ -276,6 +324,12 @@ a:hover {
 
 .button-cont {
   align-self: flex-end;
+  gap: 1rem;
+  display: flex;
+}
+
+.button-cont-alt {
+  align-self: center;
   gap: 1rem;
   display: flex;
 }
