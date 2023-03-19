@@ -49,53 +49,55 @@ export default function Account() {
   }
 
   return (
-    <div>
-      <Link to={"/"}>Back</Link>
-      <h1>Change your picture</h1>
-      <form onSubmit={uploadFile}>
-        <label>
-          <p>Upload Profile Picture</p>
-          <TextField type="file" onChange={e => setImage(e.target.files[0])} sx={textFieldStyling}></TextField>
-        </label>
-        <Button type="submit" variant="contained" color="primary">Upload File</Button>
+    <div className="register-cont">
+      <div className="sign-up-cont">
+
+        <h1>Change your picture</h1>
+        <form className="register-form" onSubmit={uploadFile}>
+          <label>
+            <p>Upload Profile Picture</p>
+            <TextField type="file" onChange={e => setImage(e.target.files[0])} sx={textFieldStyling}></TextField>
+          </label>
+          <Button type="submit" variant="contained" color="primary">Upload File</Button>
+        </form>
+        <h1>Change your password</h1>
+        <form className="register-form" onSubmit={changePass}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+              <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+              <TextField
+                id="input-with-sx"
+                label="Old Password"
+                variant="standard"
+                sx={textFieldStyling}
+                type="password"
+                onChange={ e => setOldPassword(e.target.value)}
+              />
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+              <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+              <TextField
+                id="input-with-sx"
+                label="New Password"
+                variant="standard"
+                sx={textFieldStyling}
+                type="password"
+                onChange={ e => setNewPassword(e.target.value)}
+              />
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+              <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+              <TextField
+                id="input-with-sx"
+                label="Confirm New Password"
+                variant="standard"
+                sx={textFieldStyling}
+                type="password"
+                onChange={ e => setNewPasswordConfirm(e.target.value)}
+              />
+            </Box>
+          <Button type="submit" variant="contained" color="primary">Change Password</Button>
       </form>
-      <h1>Change your password</h1>
-      <form onSubmit={changePass}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="Old Password"
-              variant="standard"
-              sx={textFieldStyling}
-              type="password"
-              onChange={ e => setOldPassword(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="New Password"
-              variant="standard"
-              sx={textFieldStyling}
-              type="password"
-              onChange={ e => setNewPassword(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-            <TextField
-              id="input-with-sx"
-              label="Confirm New Password"
-              variant="standard"
-              sx={textFieldStyling}
-              type="password"
-              onChange={ e => setNewPasswordConfirm(e.target.value)}
-            />
-          </Box>
-        <Button type="submit" variant="contained" color="primary">Change Password</Button>
-    </form>
+    </div>
   </div>
   )
 }
