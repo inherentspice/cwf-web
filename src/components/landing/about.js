@@ -10,8 +10,8 @@ export default function Landing() {
     navigate("/register");
   }
 
-  const aboutClick = () => {
-    navigate("/about");
+  const groupClick = () => {
+    navigate("/");
   }
 
   const missionClick = () => {
@@ -55,8 +55,8 @@ export default function Landing() {
             Sign up today and put your forecasting skills to the test!
           </p>
           <div className="button-cont">
-            <Button variant="contained" color="primary">Go to Groups</Button>
-            <Button variant="contained" color="secondary">Our Mission Statement</Button>
+            <Button variant="contained" color="primary" onClick={() => groupClick()}>Go to Groups</Button>
+            <Button variant="contained" color="secondary" onClick={() => missionClick()}>Our Mission Statement</Button>
           </div>
         </div>
       </div>
