@@ -50,17 +50,9 @@ a:hover {
   color: var(--main-accent-color-dark)
 }
 
-
-
 .general-content {
   display: grid;
   grid-template-columns: 15rem 1fr;
-}
-
-.sidebar {
-  padding: 1rem;
-  background-color: var(--bg-light-color);
-  height: calc(100vh - 150px)
 }
 
 .main {
@@ -69,6 +61,35 @@ a:hover {
 
 .highlight {
   color: var(--main-accent-color-dark);
+}
+
+/* sidebar */
+
+
+.sidebar {
+  padding: 1rem;
+  background-color: var(--bg-light-color);
+  height: calc(100vh - 150px)
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-submit-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.user-actions-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
 }
 
 /* group-details */
