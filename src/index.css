@@ -3,6 +3,11 @@
   --bg-light-color: #6a2bf2;
   --main-accent-color: #D8A3DC;
   --main-accent-color-dark: #F06292;
+  --color-yellow: #FDE019;
+  --color-dark-yellow: #ffc400;
+  --color-green: #90ee90;
+  --color-blue: #01D3D2;
+  --dark-color: #010118;
 }
 
 body {

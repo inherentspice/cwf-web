@@ -7,6 +7,7 @@ import EventForm from "../events/event-form";
 import { Routes, Route } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import Account from "../user/account";
+import Landing from "../landing/landing";
 
 export default function Main() {
 
@@ -21,6 +22,7 @@ export default function Main() {
         <Route path="/account" element={<Account/>}/>
         <Route path="/event/:id" element={<Event/>}/>
         <Route path="/event-form" element={<EventForm/>}/>
+        <Route path="/landing" element={<Landing/>}/>
       </Routes>
     </div>
   )
