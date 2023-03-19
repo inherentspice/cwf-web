@@ -338,3 +338,29 @@ a:hover {
   min-height: 100vh;
   display: flex;
 }
+
+/* register */
+.register-cont {
+  display: flex;
+  flex-direction: column;
+}
+.sign-up-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid var(--main-accent-color-dark);
+  padding: 2rem 10rem;
+  align-self: center;
+  border-radius: 62px;
+}
+
+.sign-up-cont h1 {
+  color: var(--color-yellow);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
