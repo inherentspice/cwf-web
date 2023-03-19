@@ -31,7 +31,7 @@ export default function Event({}) {
     if (data?.time) {
       const format = "yyyy-MM-dd'T'HH:mm:ss'Z'"
       const startTime = DateTime.fromFormat(data.time, format)
-      const endTime = DateTime.fromFormat(data.end_time, format)
+      const endTime = DateTime.fromISO(data.end_time);
       setEventStartTime(startTime);
       setEventEndTime(endTime)
       const now = DateTime.now();
@@ -62,7 +62,6 @@ export default function Event({}) {
         NotificationManager.success("End price has been set.")
       }
     } catch (err) {
-      console.log(err);
       NotificationManager.error("Something went wrong setting the end price.");
     }
   }
@@ -73,65 +72,68 @@ export default function Event({}) {
   if (loading) return <h1>Loading...</h1>
 
   return (
-    <>
+    <div className="event-cont">
+      {event && <Link to={`/details/${event.group}`}><ArrowBackIcon/></Link>}
       {event && eventStartTime &&
-        <div>
-          <Link to={`/details/${event.group}`}><ArrowBackIcon/></Link>
-          <h2>{event.crypto}</h2>
-          <p>Starting Price: ${event.price_start}</p>
-          <p>Current Price: </p>
-          <p>Ending Price: {event.price_end ? `$${event.price_end}` : ""}</p>
-          <h3> Start Time:
-            <CalendarTodayIcon className="dateTime"/>{eventStartTime.toSQLDate()}
-            <AccessTimeIcon className="dateTime"/>{eventStartTime.toFormat("HH:mm")}
-          </h3>
-          <h3> End Time:
-            <CalendarTodayIcon className="dateTime"/>{eventEndTime.toSQLDate()}
-            <AccessTimeIcon className="dateTime"/>{eventEndTime.toFormat("HH:mm")}
-          </h3>
-          <h3>{timeDifference}</h3>
-          <hr/>
-          { event && event.bets && event.bets.map(bet => {
-            return <div key={bet.id} className="bets">
-              <User user={bet.user}/>
-              <h4>${bet.price_end}</h4>
-              <h4>Points: {bet.points}</h4>
-            </div>
-          })}
-          { isFuture ?
-            <div>
-              <hr/>
+        <>
+          <div className="group-details-cont event-detail-cont">
+            <h2>{event.crypto}</h2>
+            <p>Starting Price: ${event.price_start}</p>
+            <p>Current Price: </p>
+            <p>Ending Price: {event.price_end ? `$${event.price_end}` : ""}</p>
+            <h3>Start Time:
+              <CalendarTodayIcon className="dateTime"/>{eventStartTime.toSQLDate()}
+              <AccessTimeIcon className="dateTime"/>{eventStartTime.toFormat("HH:mm")}
+            </h3>
+            <h3> End Time:
+              <CalendarTodayIcon className="dateTime"/>{eventEndTime.toSQLDate()}
+              <AccessTimeIcon className="dateTime"/>{eventEndTime.toFormat("HH:mm")}
+            </h3>
+            <h3>Ending: {timeDifference}</h3>
+          </div>
+          <div>
+            { event && event.bets && event.bets.map(bet => {
+              return <div key={bet.id} className="bets">
+                <User user={bet.user}/>
+                <h4>${bet.price_end}</h4>
+                <h4>Points: {bet.points}</h4>
+              </div>
+            })}
+            { isFuture ?
+              <div>
+                <hr/>
 
-              <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-                <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-                <TextField
-                  label="Price Prediction"
-                  variant="standard"
-                  sx={textFieldStyling}
-                  type="number"
-                  onChange={ e => setPricePrediction(e.target.value)}
-                />
-              </Box>
-              <Button variant="contained" onClick={() => sendBet()} color="secondary" disabled={!pricePrediction}>Place Bet</Button>
-            </div> :
-            <div>
-              <hr/>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+                  <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+                  <TextField
+                    label="Price Prediction"
+                    variant="standard"
+                    sx={textFieldStyling}
+                    type="number"
+                    onChange={ e => setPricePrediction(e.target.value)}
+                  />
+                </Box>
+                <Button variant="contained" onClick={() => sendBet()} color="secondary" disabled={!pricePrediction}>Place Bet</Button>
+              </div> :
+              <div>
+                <hr/>
 
-              <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-                <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-                <TextField
-                  label="Ending Price"
-                  variant="standard"
-                  sx={textFieldStyling}
-                  type="number"
-                  onChange={ e => setPriceEnd(e.target.value)}
-                />
-              </Box>
-              <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!priceEnd}>Set Ending Price</Button>
+                <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+                  <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
+                  <TextField
+                    label="Ending Price"
+                    variant="standard"
+                    sx={textFieldStyling}
+                    type="number"
+                    onChange={ e => setPriceEnd(e.target.value)}
+                  />
+                </Box>
+                <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!priceEnd}>Set Ending Price</Button>
+              </div>
+              }
             </div>
-            }
-        </div>
+        </>
       }
-    </>
+    </div>
   )
 }

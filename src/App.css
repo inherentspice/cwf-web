@@ -259,6 +259,12 @@ a:hover {
   color: var(--main-accent-color-dark);
 }
 
+.event-detail-cont {
+  align-self: flex-end;
+  min-width: 50%;
+}
+
+
 /* landing */
 .landing-background {
   max-height: 80%;
@@ -332,6 +338,11 @@ a:hover {
   align-self: center;
   gap: 1rem;
   display: flex;
+}
+
+.event-cont {
+  display: flex;
+  flex-direction: column;
 }
 
 /* about */
