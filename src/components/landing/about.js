@@ -1,5 +1,4 @@
 import BackgroundImage from "../../assets/about-image.png"
-import CallToActionIcon from '@mui/icons-material/CallToAction';
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
