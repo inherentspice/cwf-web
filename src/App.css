@@ -108,6 +108,16 @@ a:hover {
   gap: 1rem;
 }
 
+.group-list-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.new-group-btn {
+  width:fit-content;
+}
+
 .group-list-item-cont {
   text-align: left;
   border: 2px solid var(--main-accent-color);
@@ -117,12 +127,21 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 50%;
 }
 
 .member-count-cont {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+
+.group-background {
+  max-height: 65%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
 }
 
 

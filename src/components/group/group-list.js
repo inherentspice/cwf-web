@@ -1,7 +1,10 @@
+import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getGroups } from "../../services/group-services";
 import GroupListItem from "./group-list-item";
+import BackgroundImage from "../../assets/group-image.png"
+
 
 export default function GroupList() {
 
@@ -30,16 +33,16 @@ export default function GroupList() {
 
   if (loading) return <h1>Loading...</h1>
 
-  const groupClicked = groupId => {
-    console.log('here')
-    navigate(`details/${groupId}`)
+  const newGroupClick = () => {
+    navigate("/group-form");
   }
-
   return (
-    <div>
+    <div className="group-list-cont">
+      <Button className="new-group-btn" variant="contained" color="secondary" onClick={() => newGroupClick()}>Create Group +</Button>
         {groups && Array.from(groups).map((group) => {
           return <GroupListItem group={group} key={group.id}/>
         })}
+      <img src={BackgroundImage} alt="Background image" className="group-background"/>
     </div>
   );
 }
