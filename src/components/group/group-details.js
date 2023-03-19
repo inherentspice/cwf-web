@@ -16,7 +16,6 @@ export default function GroupDetails() {
   const [ data, loading, error] = useFetchGroup(id);
   const [ group, setGroup ] = useState(null);
   const [ inGroup, setInGroup ] = useState(false);
-  const [ isAdmin, setIsAdmin ] = useState(false);
 
   const navigate = useNavigate();
 
@@ -26,7 +25,6 @@ export default function GroupDetails() {
 
       if (authData?.user) {
         setInGroup(!!data.members.find(member => member.user.id === authData.user.id))
-        setIsAdmin(data.members.find(member => member.user.id === authData.user.id)?.admin)
       }
     }
     setGroup(data);
@@ -59,31 +57,39 @@ export default function GroupDetails() {
   if (loading) return <h1>Loading...</h1>
 
   return (
-    <div>
-      <Link to={"/"}><ArrowBackIcon/></Link>
+    <div className="group-event-cont">
+      <Link to={"/group-list"}><ArrowBackIcon/></Link>
       {group &&
         <>
-          <h1>Details here for {group.name}: {group.location}</h1>
-          <h2>{group.description}</h2>
-          {inGroup ?
-            <Button onClick={() => leaveHere()} variant="contained" color="primary">Leave Group</Button> :
-            <Button onClick={() => joinHere()} variant="contained" color="primary">Join Group</Button>
-          }
+          <div className="group-details-cont">
+            <h1>{group.name}: {group.location}</h1>
+            <h2>Description: {group.description}</h2>
+            <div className="button-cont-alt">
+              {inGroup ?
+                <Button onClick={() => leaveHere()} variant="outlined" color="secondary">Leave Group</Button> :
+                <Button onClick={() => joinHere()} variant="outlined" color="secondary">Join Group</Button>
+              }
 
-          {isAdmin && <Button onClick={() => addEvent()} variant="contained" color="primary">Add Event</Button>}
+              <Button onClick={() => addEvent()} variant="contained" color="secondary">Add Event</Button>
+            </div>
+          </div>
+          <div>
+            <EventList events={group.events}/>
+          </div>
+          <div>
+            <h3>Members:</h3>
+            <div className="member-list-cont">
+              {group.members.map((member) => {
 
-          <EventList events={group.events}/>
-
-          <h3>Members:</h3>
-          {group.members.map((member) => {
-
-            return (
-              <div id={member.id} className="member-container">
-                <User user={member.user}/>
-                <p>{member.points | 0}pts</p>
-              </div>
-            )
-          })}
+                return (
+                  <div id={member.id} className="member-container">
+                    <User user={member.user}/>
+                    <p>{member.points | 0}pts</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
           <Comments group={group}/>
         </>
       }

@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
 import { postComment } from "../../services/group-services";
+import { textFieldStyling } from "../layout/mui-styles";
 import Comment from "./comment";
 
 export default function Comments({group}) {
@@ -24,16 +25,17 @@ export default function Comments({group}) {
     }
   }
   return (
-    <div>
+    <div className="comments-cont">
       <hr/>
-      <h1>Comments:</h1>
+      <h3>Comments:</h3>
       <TextField
         label="New Comment"
         multiline
         fullWidth
         rows={4}
-        variant="outlined"
+        variant="filled"
         value={newComment}
+        sx={textFieldStyling}
         onChange={(e) => setNewComment(e.target.value)}
       />
       <Button onClick={() => sendComment()} disabled={!newComment} variant="contained" color="secondary">Send Comment</Button>

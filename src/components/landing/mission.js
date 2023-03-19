@@ -12,9 +12,9 @@ export default function Landing() {
   return (
     <div className="mission-cont">
       <div className="landing-info-cont">
-        <h1>Re-Imagining Web3 Engagement</h1>
+        <h1>Community Through Crypto</h1>
         <p>
-          At CryptoPredict, our mission is to empower individuals through a unique combination of fun, education, and an immersive glimpse into the future of finance.
+          At Crypto With Friends, our mission is to empower individuals through a unique combination of fun, education, and an immersive glimpse into the future of finance.
           We strive to create a platform that sparks curiosity and fosters continuous learning while providing an entertaining and engaging environment.
           Our vision is to become the go-to destination for crypto enthusiasts, gamblers, and novices alike, as they embark on a journey to uncover the immense potential of digital currencies and the underlying blockchain technology.
         </p>
@@ -24,7 +24,7 @@ export default function Landing() {
           Our platform is designed to be accessible and enjoyable for everyone, regardless of their background or experience level, ensuring that the doors of the future are wide open for all.
         </p>
         <p>
-          As we look towards the future, CryptoPredict will continue to innovate and adapt to the ever-changing landscape of digital finance.
+          As we look towards the future, Crypto With Friends will continue to innovate and adapt to the ever-changing landscape of digital finance.
           We will actively seek out new opportunities to expand our offerings, integrate emerging technologies, and create even more engaging experiences for our users.
           With a steadfast dedication to fun, education, and the future, we aim to inspire our users to embrace the exciting possibilities that lie ahead with confidence and enthusiasm.
           Together, we will navigate the uncharted waters of the crypto economy and shape a more connected, informed, and prosperous tomorrow.

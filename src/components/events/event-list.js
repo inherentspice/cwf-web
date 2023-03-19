@@ -12,19 +12,17 @@ export default function EventList({events}) {
   const openEvent = eventId => {
     navigate(`/event/${eventId}`);
   }
+
   return (
     <>
       <h3>Events:</h3>
       {events && events.map((event) => {
-        const format = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        const eventTime = DateTime.fromFormat(event.time, format);
-
+        const eventTime = DateTime.fromISO(event.end_time);
         return (
-          <div id={event.id} onClick={() => openEvent(event.id)}>
-            <p>{event.crypto}
-            &nbsp; : &nbsp;
-              <CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}
-              <AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}</p>
+          <div id={event.id} className="event-info" onClick={() => openEvent(event.id)}>
+            <p>{event.crypto}:</p>
+            <p><CalendarTodayIcon className="dateTime"/>{eventTime.toSQLDate()}</p>
+            <p><AccessTimeIcon className="dateTime"/>{eventTime.toFormat("HH:mm")}</p>
           </div>
         )
       })}

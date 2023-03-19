@@ -66,3 +66,19 @@ export async function postComment(token, description, group, user) {
     console.log(err);
   }
 }
+
+export async function postGroup(token, data) {
+  try {
+    const groupData = await fetch(`${apiUrl}/api/groups/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+    return await status(groupData);
+  } catch (err) {
+    console.log(err);
+  }
+}
