@@ -8,6 +8,8 @@ import { Routes, Route } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import Account from "../user/account";
 import Landing from "../landing/landing";
+import About from "../landing/about";
+import Mission from "../landing/mission";
 
 export default function Main() {
 
@@ -23,6 +25,8 @@ export default function Main() {
         <Route path="/event/:id" element={<Event/>}/>
         <Route path="/event-form" element={<EventForm/>}/>
         <Route path="/landing" element={<Landing/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/mission" element={<Mission/>}/>
       </Routes>
     </div>
   )
