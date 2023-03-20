@@ -12,6 +12,7 @@ import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import { placeBet, setEndPrice } from "../../services/event-services";
 import { NotificationManager } from "react-notifications";
 import { textFieldStyling } from "../layout/mui-styles";
+import Charts from "./charts";
 
 export default function Event({}) {
 
@@ -131,6 +132,7 @@ export default function Event({}) {
                 <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!priceEnd}>Set Ending Price</Button>
               </div>
               }
+              <Charts coin={event.crypto}/>
             </div>
         </>
       }
