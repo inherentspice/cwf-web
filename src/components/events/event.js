@@ -26,6 +26,7 @@ export default function Event({}) {
   const [ timeDifference, setTimeDifference ] = useState(null);
   const [ pricePrediction, setPricePrediction ] = useState(null);
   const [ priceEnd, setPriceEnd ] = useState(null);
+  const [ currentPrice, setCurrentPrice ] = useState(null);
 
   useEffect(() => {
     setEvent(data);
@@ -40,6 +41,21 @@ export default function Event({}) {
       setTimeDifference(endTime.toRelative())
     }
   }, [data]);
+
+  useEffect(() => {
+    if (event) fetchCurrentPrice();
+  }, [event])
+
+  const fetchCurrentPrice = async () => {
+    const coinId = event.crypto.toLowerCase();
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`
+    );
+
+    const data = await response.json();
+    console.log(data)
+    setCurrentPrice(data[coinId].usd);
+  };
 
   const sendBet = async () => {
     try {
@@ -80,7 +96,7 @@ export default function Event({}) {
           <div className="group-details-cont event-detail-cont">
             <h2>{event.crypto}</h2>
             <p>Starting Price: ${event.price_start}</p>
-            <p>Current Price: </p>
+            <p>Current Price: ${currentPrice}</p>
             <p>Ending Price: {event.price_end ? `$${event.price_end}` : ""}</p>
             <h3>Start Time:
               <CalendarTodayIcon className="dateTime"/>{eventStartTime.toSQLDate()}
