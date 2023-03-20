@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { TextField, Box, Button } from "@mui/material";
+import { TextField, Box, Button, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -50,44 +50,54 @@ export default function EventForm() {
   return (
     <>
       <Link to={`/details/${location.state.id}`}><ArrowBackIcon/></Link>
-
-      <h1>Event Form for group {location.state.id}</h1>
-      <hr/>
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-          <TextField
-            label="Cryptocurrency"
-            variant="standard"
-            sx={textFieldStyling}
-            type="text"
-            onChange={ (e) => setCrypto(e.target.value)}
-          />
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-          <TextField
-            label="Current Price"
-            variant="standard"
-            sx={textFieldStyling}
-            type="number"
-            onChange={ (e) => setPriceStart(e.target.value)}
-          />
-        </Box>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer
-            components={[
-              'MobileDateTimePicker',
-            ]}
-          >
-            <DemoItem label="Event End Date/Time">
-              <MobileDateTimePicker
-                value={dayjs(eventEnd)}
-                onChange={(e) => setEventEnd(dayjs(e))}
-                sx={datePickerStyling} />
-            </DemoItem>
-          </DemoContainer>
-        </LocalizationProvider>
-        <Button variant="contained" color="primary" type="submit">Create Event</Button>
-      </form>
+      <div className="register-cont">
+        <div className="sign-up-cont">
+          <h1>Event Form for {location.state.name}</h1>
+          <form onSubmit={handleSubmit}>
+          <FormControl variant="standard" sx={textFieldStyling} style={{width: "180px"}}>
+            <InputLabel htmlFor="cryptocurrency">Cryptocurrency</InputLabel>
+            <Select
+              value={crypto}
+              onChange={(e) => setCrypto(e.target.value)}
+              label="Cryptocurrency"
+              inputProps={{
+                name: 'cryptocurrency',
+                id: 'cryptocurrency',
+              }}
+            >
+              <MenuItem value="bitcoin">Bitcoin</MenuItem>
+              <MenuItem value="ethereum">Ethereum</MenuItem>
+              <MenuItem value="polkadot">Polkadot</MenuItem>
+              <MenuItem value="doge">Doge</MenuItem>
+            </Select>
+          </FormControl>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
+              <TextField
+                label="Current Price"
+                variant="standard"
+                sx={textFieldStyling}
+                type="number"
+                onChange={ (e) => setPriceStart(e.target.value)}
+              />
+            </Box>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer
+                components={[
+                  'MobileDateTimePicker',
+                ]}
+              >
+                <DemoItem label="Event End Date/Time">
+                  <MobileDateTimePicker
+                    value={dayjs(eventEnd)}
+                    onChange={(e) => setEventEnd(dayjs(e))}
+                    sx={datePickerStyling} />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
+            <Button variant="contained" color="primary" type="submit">Create Event</Button>
+          </form>
+        </div>
+      </div>
     </>
   )
 }
