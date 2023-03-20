@@ -35,7 +35,10 @@ export const textFieldStyling = {
   },
   "label": {
     color: "white"
-  }
+  },
+  "& .MuiSelect-select": {
+    color: 'white',
+  },
 }
 
 export const datePickerStyling = {
@@ -75,4 +78,24 @@ export const datePickerStyling = {
   "input": {
     color: "white"
   }
+}
+
+export const selectStyling = {
+  '& .MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'white',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'white',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'white',
+    },
+    '& .MuiSelect-select': {
+      color: 'white',
+    },
+  },
 }
