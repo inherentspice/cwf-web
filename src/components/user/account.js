@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
-import { Button, TextField, Box } from "@mui/material";
+import { Button, TextField, Box, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
-import { changePassword, uploadProfilePic } from "../../services/user-services";
+import { auth, changePassword, uploadProfilePic } from "../../services/user-services";
 import { NotificationManager } from "react-notifications";
-import { textFieldStyling } from "../layout/mui-styles";
+import { textFieldStyling, selectStyling } from "../layout/mui-styles";
 
 
 export default function Account() {
 
-  const { authData } = useAuth();
-  const [ image, setImage ] = useState();
+  const { authData, setAuth } = useAuth();
+  const [ color, setColor ] = useState("");
   const [ oldPassword, setOldPassword ] = useState("");
   const [ newPassword, setNewPassword ] = useState("");
   const [ newPasswordConfirm, setNewPasswordConfirm] = useState("");
@@ -20,17 +20,31 @@ export default function Account() {
     return newPassword === newPasswordConfirm;
   }
 
-  const uploadFile = async e => {
+  const changeProfileBackground = async e => {
     e.preventDefault();
-    const uploadData = new FormData();
-    uploadData.append("image", image, image.name);
+    const uploadData = {image: color}
     const uploaded = await uploadProfilePic(authData.token, authData.user.id, uploadData);
     if (uploaded) {
-      NotificationManager.success("Image has been uploaded");
+      setAuth(prevState => {
+        const updatedAuthData = {
+          ...prevState,
+          user: {
+            ...prevState.user,
+            profile: {
+              ...prevState.user.profile,
+              image: color
+            }
+          }
+        };
+
+        return updatedAuthData;
+      });
     } else {
       NotificationManager.error("Error uploading image")
     }
   }
+
+  console.log(authData);
 
   const changePass = async e => {
     e.preventDefault();
@@ -52,20 +66,35 @@ export default function Account() {
     <div className="register-cont">
       <div className="sign-up-cont">
 
-        <h1>Change your picture</h1>
-        <form className="register-form" onSubmit={uploadFile}>
-          <label>
-            <p>Upload Profile Picture</p>
-            <TextField type="file" onChange={e => setImage(e.target.files[0])} sx={textFieldStyling}></TextField>
-          </label>
-          <Button type="submit" variant="contained" color="primary">Upload File</Button>
+        <h1>Change your profile background</h1>
+        <form className="register-form" onSubmit={changeProfileBackground}>
+          <FormControl sx={selectStyling} variant="outlined" style={{ marginBottom: "16px", width: "190px" }}>
+            <InputLabel>Profile Background</InputLabel>
+            <Select
+              value={color}
+              onChange={e => setColor(e.target.value)}
+              label="Color"
+              sx={textFieldStyling}
+              variant="filled"
+              inputProps={{
+                name: 'graph-color',
+                id: 'graph-color',
+              }}
+            >
+              <MenuItem value="#01D3D2">blue</MenuItem>
+              <MenuItem value="#90ee90">green</MenuItem>
+              <MenuItem value="#ffc400">yellow</MenuItem>
+              <MenuItem value="#F06292">pink</MenuItem>
+              <MenuItem value="#D8A3DC">purple</MenuItem>
+            </Select>
+          </FormControl>
+          <Button type="submit" variant="contained" color="primary">Change Background</Button>
         </form>
         <h1>Change your password</h1>
         <form className="register-form" onSubmit={changePass}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
               <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
               <TextField
-                id="input-with-sx"
                 label="Old Password"
                 variant="standard"
                 sx={textFieldStyling}
@@ -87,7 +116,6 @@ export default function Account() {
             <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
               <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
               <TextField
-                id="input-with-sx"
                 label="Confirm New Password"
                 variant="standard"
                 sx={textFieldStyling}

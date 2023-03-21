@@ -56,7 +56,7 @@ export async function uploadProfilePic(token, profileId, data) {
         "Content-Type": "application/json",
         "Authorization": `Token ${token}`
       },
-      body: data
+      body: JSON.stringify(data)
     })
     return await status(authData)
   } catch (err) {

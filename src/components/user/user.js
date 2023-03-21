@@ -3,9 +3,8 @@ import { Avatar } from '@mui/material';
 import { pink } from '@mui/material/colors';
 
 export default function User({user}) {
-
   const avatarStyle = {
-    backgroundColor: pink[300],
+    backgroundColor: user.profile?.image || "#F06292",
     width: "100px",
     height: "100px",
     fontSize: "2.5rem",
