@@ -77,6 +77,9 @@ export default function EventForm() {
                 variant="standard"
                 sx={textFieldStyling}
                 type="number"
+                inputProps={{
+                  step: "0.01"
+                }}
                 onChange={ (e) => setPriceStart(e.target.value)}
               />
             </Box>

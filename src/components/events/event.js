@@ -127,6 +127,9 @@ export default function Event({}) {
                     variant="standard"
                     sx={textFieldStyling}
                     type="number"
+                    inputProps={{
+                      step: "0.01"
+                    }}
                     onChange={ e => setPricePrediction(e.target.value)}
                   />
                 </Box>
@@ -142,6 +145,9 @@ export default function Event({}) {
                     variant="standard"
                     sx={textFieldStyling}
                     type="number"
+                    inputProps={{
+                      step: "0.01"
+                    }}
                     onChange={ e => setPriceEnd(e.target.value)}
                   />
                 </Box>
