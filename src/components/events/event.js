@@ -109,17 +109,23 @@ export default function Event({}) {
             <h3>Ending: {timeDifference}</h3>
           </div>
           <div>
-            { event && event.bets && event.bets.map(bet => {
-              return <div key={bet.id} className="bets">
-                <User user={bet.user}/>
-                <h4>${bet.price_end}</h4>
-                <h4>Points: {bet.points}</h4>
-              </div>
-            })}
+            { event && event.bets &&
+            <div>
+              <hr/>
+              <h2>Bets</h2>
+              {event.bets.map(bet => {
+                return <div key={bet.id} className="bets">
+                  <User user={bet.user}/>
+                  <h4>${bet.price_end}</h4>
+                  <h4>Points: {bet.points}</h4>
+                </div>
+              })}
+            </div>
+            }
             { isFuture ?
               <div>
                 <hr/>
-
+                <h2>Make a Prediction</h2>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
                   <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
                   <TextField

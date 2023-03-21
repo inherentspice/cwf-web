@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from "recharts";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { selectStyling, textFieldStyling } from "../layout/mui-styles";
 
@@ -86,6 +86,7 @@ export default function Charts({coin}) {
 
   return (
     <div>
+      <hr/>
       <h1>Historical {coinId} Data</h1>
       <FormControl sx={selectStyling} variant="outlined" style={{ marginBottom: "16px", width: "100px" }}>
         <InputLabel htmlFor="graph-color">Graph Color</InputLabel>
@@ -132,14 +133,17 @@ export default function Charts({coin}) {
         </Select>
       </FormControl>
 
-      {coinData && <LineChart width={1000} height={500} data={coinData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="purple" />
-        <XAxis dataKey="date" stroke={graphColor}/>
-        <YAxis stroke={graphColor}/>
-        <Tooltip content={<CustomTooltip/>}/>
-        <Legend />
-        <Line type="cardinal" dataKey="price" stroke={graphColor} />
-      </LineChart>}
+      {coinData &&
+        <ResponsiveContainer className="chart-cont">
+          <LineChart data={coinData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="purple" />
+            <XAxis dataKey="date" stroke={graphColor} />
+            <YAxis stroke={graphColor} />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            <Line type="cardinal" dataKey="price" stroke={graphColor} />
+          </LineChart>
+        </ResponsiveContainer>}
     </div>
   );
 };
