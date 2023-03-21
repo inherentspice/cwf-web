@@ -73,7 +73,7 @@ export default function Event({}) {
 
   const sendEndPrice = async () => {
     try {
-      const eventData = await setEndPrice(authData.token, {price_end: priceEnd, event: event.id})
+      const eventData = await setEndPrice(authData.token, {event: event.id})
       if (eventData) {
         setEvent(eventData)
         NotificationManager.success("End price has been set.")
@@ -109,7 +109,7 @@ export default function Event({}) {
             <h3>Ending: {timeDifference}</h3>
           </div>
           <div>
-            { event && event.bets &&
+            { event && event.bets.length > 0 &&
             <div>
               <hr/>
               <h2>Bets</h2>
@@ -144,20 +144,8 @@ export default function Event({}) {
               <div>
                 <hr/>
 
-                <Box sx={{ display: 'flex', alignItems: 'flex-end'}}>
-                  <CurrencyBitcoinIcon sx={{ color: 'action.active', mr: 1, my: 0.5, color: 'white'}} />
-                  <TextField
-                    label="Ending Price"
-                    variant="standard"
-                    sx={textFieldStyling}
-                    type="number"
-                    inputProps={{
-                      step: "0.01"
-                    }}
-                    onChange={ e => setPriceEnd(e.target.value)}
-                  />
-                </Box>
-                <Button variant="contained" onClick={() => sendEndPrice()} color="secondary" disabled={!priceEnd}>Set Ending Price</Button>
+                <h2>Get Final Price & Calculate Scores</h2>
+                <Button variant="contained" onClick={() => sendEndPrice()} color="secondary">Set Ending Price</Button>
               </div>
               }
               <Charts coin={event.crypto}/>
