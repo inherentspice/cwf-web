@@ -9,7 +9,12 @@
   --color-blue: #01D3D2;
   --dark-color: #010118;
 }
-
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

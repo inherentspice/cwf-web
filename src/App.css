@@ -16,6 +16,7 @@ a:hover {
   justify-content: space-between;
   height: 100px;
   padding: 1rem;
+  position: relative;
 }
 
 .nav {
@@ -322,7 +323,6 @@ a:hover {
 .breakaway-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(1fr, 4);
   color: var(--color-dark-yellow);
   font-weight: 800;
   font-size: 1.2rem;
@@ -447,4 +447,138 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.chart-cont {
+  width: 900px !important;
+  height: 500px !important;
+}
+
+@media screen and (max-width: 1200px){
+  .landing-background {
+    max-height: 50%;
+  }
+
+  .about-background {
+    max-height: 50%;
+  }
+
+  .group-background {
+    max-height: 50%;
+  }
+
+  .bio-instructions-cont {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about-instructions-cont {
+    align-self: flex-start;
+  }
+
+  .info-cont {
+    flex-direction: column;
+  }
+
+  .event-detail-cont {
+    align-self: auto;
+  }
+
+  .chart-cont {
+    width: 700px !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .chart-cont {
+    width: 600px !important;
+  }
+}
+
+@media screen and (max-width: 900px){
+  .general-content {
+    grid-template-columns: 10rem 1fr;
+  }
+  .landing-background {
+    display: none;
+  }
+
+  .mission-background {
+    display: none;
+  }
+
+  .group-background {
+    max-height: 30%;
+  }
+
+  .landing-info-cont {
+    max-width: 100%;
+  }
+
+  .about-instructions-cont {
+    width:auto;
+  }
+
+  .about-info-cont {
+    width:auto;
+    height: auto;
+  }
+
+  .group-event-cont {
+    display: block;
+  }
+
+  .chart-cont {
+    width: 500px !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .chart-cont {
+    width: 400px !important;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .general-content {
+    grid-template-columns: 1fr;
+  }
+
+  .breakaway-list {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-info-cont {
+    padding: 0 0.5rem;
+    border-radius: 0;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .nav {
+    width: auto;
+  }
+
+  .group-background {
+    display: none;
+  }
+
+  .group-list-item-cont {
+    width: auto;
+  }
+
+  .sign-up-cont {
+    padding: 1rem;
+    width: 95%;
+  }
+
+  .comment-cont {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .chart-cont {
+    width: 380px !important;
+  }
 }
